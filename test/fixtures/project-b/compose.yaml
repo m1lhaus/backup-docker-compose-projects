@@ -1,0 +1,17 @@
+# Fixture project B: two services, each writing into its own bind-mounted folder.
+name: test-project-b
+
+services:
+  writer-one:
+    image: alpine
+    container_name: test-project-b-writer-one
+    command: ["sh", "-c", "echo project-b-one > /data/marker.txt && sleep infinity"]
+    volumes:
+      - ./data/one:/data
+
+  writer-two:
+    image: alpine
+    container_name: test-project-b-writer-two
+    command: ["sh", "-c", "echo project-b-two > /data/marker.txt && sleep infinity"]
+    volumes:
+      - ./data/two:/data

@@ -1,0 +1,11 @@
+# Fixture project that lives OUTSIDE the source folder but writes inside it.
+# The backup must refuse to run rather than archive a folder it cannot quiesce.
+name: test-project-outside
+
+services:
+  writer:
+    image: alpine
+    container_name: test-project-outside-writer
+    command: ["sh", "-c", "echo outside > /data/marker.txt && sleep infinity"]
+    volumes:
+      - ${OUTSIDE_TARGET}:/data

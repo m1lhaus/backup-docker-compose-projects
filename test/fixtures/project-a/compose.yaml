@@ -1,0 +1,11 @@
+# Fixture project A: one service writing into a bind-mounted folder.
+# The project name is pinned so the tests can find it regardless of folder name.
+name: test-project-a
+
+services:
+  writer:
+    image: alpine
+    container_name: test-project-a-writer
+    command: ["sh", "-c", "echo project-a > /data/marker.txt && chmod 600 /data/marker.txt && sleep infinity"]
+    volumes:
+      - ./data:/data
